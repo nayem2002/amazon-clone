@@ -91,7 +91,7 @@ const Checkout = () => {
                         <span disabled>{cartQuintity}</span>
                         <AddIcon
                           className="quantity-btn"
-                          onClick={() => dispatch(addToCart(carentEle))}
+                          onClick={() => dispquintity-btnatch(addToCart(carentEle))}
                         />
                       </div>
                       <span>|</span>
