@@ -324,7 +324,7 @@ body {
 .search-icon {
   position: absolute;
   right: 0;
-  font-size: 2.3rem!important;
+  font-size: 2.3rem !important;
   background: #fbb459;
   width: 40px;
   height: 37px;
@@ -348,7 +348,7 @@ body {
 }
 
 .basket {
-  font-size: 2.5rem!important;
+  font-size: 2.5rem !important;
 }
 
 .checkout small {
@@ -725,8 +725,17 @@ button:hover {
   }
 }
 
+@media only screen and (max-width: 850px) {
+  .acount {
+    font-size: 10px;
+  }
+}
+
 @media only screen and (max-width: 950px) {
   .country {
+    display: none;
+  }
+  .order {
     display: none;
   }
 }

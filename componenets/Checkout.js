@@ -1,16 +1,16 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   addToCart,
   cartTotalItemAndAmount,
   dicrementQuintity,
   removeItem,
-} from '../feature/CartSlice';
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add';
-import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
+} from "../feature/CartSlice";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 const stripePromise = loadStripe(process.env.stripe_public_key);
 
@@ -26,21 +26,26 @@ const Checkout = () => {
     dispatch(cartTotalItemAndAmount());
   }, [basket]);
   const handlePayment = async () => {
-    if (user) {
-      const stripe = await stripePromise;
+    try {
+      if (user) {
+        const stripe = await stripePromise;
 
-      const checkoutSession = await axios.post('/api/create-payment', {
-        basket,
-        email: user.email,
-      });
-      const res = await stripe.redirectToCheckout({
-        sessionId: checkoutSession.data.id,
-      });
-      if (res.error) {
-        alert(res.error.message);
+        const checkoutSession = await axios.post("/api/create-payment", {
+          basket,
+          email: user.email,
+        });
+        const res = await stripe.redirectToCheckout({
+          sessionId: checkoutSession.data.id,
+        });
+        if (res.error) {
+          alert(res.error.message);
+        }
+      } else {
+        router.push("/signin");
       }
-    } else {
-      router.push('/signin');
+    } catch (error) {
+      alert(error.message);
+      // alert("somethign is wrong");
     }
   };
   return (
@@ -59,8 +64,8 @@ const Checkout = () => {
             <div className="mein-heading">
               <h1>
                 {basket.length === 0
-                  ? 'Your Amazon Cart is empty.'
-                  : 'Shopping Cart'}
+                  ? "Your Amazon Cart is empty."
+                  : "Shopping Cart"}
               </h1>
               <hr />
             </div>
@@ -90,8 +95,8 @@ const Checkout = () => {
                         />
                         <span disabled>{cartQuintity}</span>
                         <AddIcon
-                          className="quantity-btn"
-                          onClick={() => dispquintity-btnatch(addToCart(carentEle))}
+                          className="quintity-btn"
+                          onClick={() => dispatch(addToCart(carentEle))}
                         />
                       </div>
                       <span>|</span>

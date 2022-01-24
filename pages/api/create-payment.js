@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRITE_KEY);
+const stripe = require("stripe")(process.env.STRIPE_SECRITE_KEY);
 
 export default async function checkout(req, res) {
   const { basket, email } = req.body;
@@ -7,7 +7,7 @@ export default async function checkout(req, res) {
     discription: item.discription,
     quantity: 1,
     price_data: {
-      currency: 'usd',
+      currency: "usd",
       unit_amount: item.price * 100,
       product_data: {
         name: item.title,
@@ -17,13 +17,13 @@ export default async function checkout(req, res) {
   }));
 
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    shipping_rates: ['shr_1K7mDxGwbpYF8ZCZvHjc7CcQ'],
+    payment_method_types: ["card"],
+    // shipping_rates: ["shr_1KLQbAFZFq3m5bA0u0wNMass"],
     shipping_address_collection: {
-      allowed_countries: ['GB', 'US', 'CA', 'BD'],
+      allowed_countries: ["GB", "US", "CA", "BD"],
     },
     line_items: transformedItems,
-    mode: 'payment',
+    mode: "payment",
     success_url: `${process.env.HOST}/success`,
     cancel_url: `${process.env.HOST}/checkout`,
     metadata: {
@@ -32,4 +32,4 @@ export default async function checkout(req, res) {
     },
   });
   res.status(200).json({ id: session.id });
-};
+}
