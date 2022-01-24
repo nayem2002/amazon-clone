@@ -31,7 +31,7 @@ const CreateNewAccout = () => {
         <div className="singup">
           <img src="logo.png" alt="logo" />
           <div className="singup-box">
-            <h1>Sing in</h1>
+            <h1>Sing Up</h1>
             <form action="" onSubmit={regester}>
               <label htmlFor="" id="input-one">
                 E-mail
