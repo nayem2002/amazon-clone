@@ -324,7 +324,7 @@ body {
 .search-icon {
   position: absolute;
   right: 0;
-  font-size: 1.5rem;
+  font-size: 2.3rem!important;
   background: #fbb459;
   width: 40px;
   height: 37px;
@@ -348,7 +348,7 @@ body {
 }
 
 .basket {
-  font-size: 2.5rem;
+  font-size: 2.5rem!important;
 }
 
 .checkout small {
