@@ -30,16 +30,22 @@ const Checkout = () => {
     try {
       if (user) {
         const stripe = await stripePromise;
-
-        const checkoutSession = await axios.post("/api/create-payment", {
-          basket,
-          email: user.email,
+        const checkoutSession = await axios("/api/create-payment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: {
+            basket,
+            email: user.email,
+          },
         });
         const res = await stripe.redirectToCheckout({
           sessionId: checkoutSession.data.id,
         });
         if (res.error) {
           alert(res.error.message);
+          console.log(res.error);
         }
       } else {
         router.push("/signin");
