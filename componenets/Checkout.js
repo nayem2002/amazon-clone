@@ -12,8 +12,9 @@ import AddIcon from "@mui/icons-material/Add";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
-const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
-
+const stripePromise = loadStripe(
+  "pk_test_51JnL3NFZFq3m5bA0O1Qi5kkkxA3AJW67w35vk7GVSiDCg2MeEiLw1X1ki8eHEgUqyvjFMFqFazZiskzg0C818Dkr00OqReYHsL"
+);
 const Checkout = () => {
   const { user, basket, basketTotalItem, basketTotalAmount } = useSelector(
     (state) => state.cart
